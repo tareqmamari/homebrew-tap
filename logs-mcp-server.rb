@@ -5,21 +5,21 @@
 class LogsMcpServer < Formula
   desc "IBM Cloud Logs MCP Server - Model Context Protocol server for IBM Cloud Logs"
   homepage "https://github.com/tareqmamari/logs-mcp-server"
-  version "0.5.1"
+  version "0.6.0"
   license "UNLICENSED"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.5.1/cloud-logs-mcp_0.5.1_Darwin_x86_64.tar.gz"
-      sha256 "825acc8898daebcf96335931ae517893e0eb7b70ab4740453e56eb37d47f9f78"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.6.0/cloud-logs-mcp_0.6.0_Darwin_x86_64.tar.gz"
+      sha256 "3982219313efb2f5ac0381980372c58517d0ccb2fd494cdea796d1d6056c5429"
 
       def install
         bin.install "logs-mcp-server"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.5.1/cloud-logs-mcp_0.5.1_Darwin_arm64.tar.gz"
-      sha256 "e34092b50f01475a3f47b2a6faf8a3a1b2f8a72e205102a45e180b459afee649"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.6.0/cloud-logs-mcp_0.6.0_Darwin_arm64.tar.gz"
+      sha256 "4d2748e11b70152678ee922af5fc3bb6bb5a64479440669cf4ca9e22f7c26916"
 
       def install
         bin.install "logs-mcp-server"
@@ -29,15 +29,15 @@ class LogsMcpServer < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.5.1/cloud-logs-mcp_0.5.1_Linux_x86_64.tar.gz"
-      sha256 "71517d65b42ed1886ae135c0f867c84d935657063c264389432180cd3f0c749a"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.6.0/cloud-logs-mcp_0.6.0_Linux_x86_64.tar.gz"
+      sha256 "0c2f4799462cde32c6bd78350b2c3937bc4e3155f75e1aa70dcd13d5789805df"
       def install
         bin.install "logs-mcp-server"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.5.1/cloud-logs-mcp_0.5.1_Linux_arm64.tar.gz"
-      sha256 "55701e203b4fbffd29e6f93b5d34c04af56b990989c0be2609980621879dd1b7"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.6.0/cloud-logs-mcp_0.6.0_Linux_arm64.tar.gz"
+      sha256 "7a57393726be91d09b438d615ff18d38ac0467bb1b3e0aa9940275b414ad61eb"
       def install
         bin.install "logs-mcp-server"
       end
@@ -51,7 +51,6 @@ class LogsMcpServer < Formula
         2. Set environment variables:
            export LOGS_API_KEY='your-api-key'
            export LOGS_SERVICE_URL='https://[instance-id].api.[region].logs.cloud.ibm.com'
-           export LOGS_REGION='us-south'
         3. Configure in Claude Desktop
 
       For more information, see: https://github.com/tareqmamari/logs-mcp-server
