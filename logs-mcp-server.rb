@@ -5,21 +5,21 @@
 class LogsMcpServer < Formula
   desc "IBM Cloud Logs MCP Server - Model Context Protocol server for IBM Cloud Logs"
   homepage "https://github.com/tareqmamari/cloud-logs-mcp"
-  version "0.10.0"
+  version "0.11.0"
   license "UNLICENSED"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.10.0/cloud-logs-mcp_0.10.0_Darwin_x86_64.tar.gz"
-      sha256 "d3cdbe5cea3a469c83db0d3ea6c1596775bff1f459b5608134ca4098ee30f5f3"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.11.0/cloud-logs-mcp_0.11.0_Darwin_x86_64.tar.gz"
+      sha256 "2d862e7081ebc9af36408c81c0c1fd80505005fbd4326670f387dd556e93ee82"
 
       define_method(:install) do
         bin.install "logs-mcp-server"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.10.0/cloud-logs-mcp_0.10.0_Darwin_arm64.tar.gz"
-      sha256 "35c71f1fb616dc6ce0a3c0c116ebd772e2c4ac9945b807cbdaeea5b15a5673ce"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.11.0/cloud-logs-mcp_0.11.0_Darwin_arm64.tar.gz"
+      sha256 "7cf46ec6c831b5d6c0a74c0c20c6ec73d061b2afef9e716222b3d2a3dabb804a"
 
       define_method(:install) do
         bin.install "logs-mcp-server"
@@ -29,19 +29,24 @@ class LogsMcpServer < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.10.0/cloud-logs-mcp_0.10.0_Linux_x86_64.tar.gz"
-      sha256 "f1f387b947b140d0a411b82cf5fc77509b6f3b225093f8b45de87b71f847277d"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.11.0/cloud-logs-mcp_0.11.0_Linux_x86_64.tar.gz"
+      sha256 "a3dc30918d4387fbd0fbb497c6ab900a793d79a24f98e9b37645d00385a08c84"
       define_method(:install) do
         bin.install "logs-mcp-server"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.10.0/cloud-logs-mcp_0.10.0_Linux_arm64.tar.gz"
-      sha256 "7c03257567a802fc70b9d0056a1bcfca65f12e4637992819568c6385106e6355"
+      url "https://github.com/tareqmamari/cloud-logs-mcp/releases/download/v0.11.0/cloud-logs-mcp_0.11.0_Linux_arm64.tar.gz"
+      sha256 "00e88c36635c56bd55e892f369da085d9e3d137b08a52e3ab053aae7bd5a1e9c"
       define_method(:install) do
         bin.install "logs-mcp-server"
       end
     end
+  end
+
+  def post_install
+    # Auto-install embedded agent skills to user-level directory
+    system "#{bin}/logs-mcp-server", "skills", "install"
   end
 
   def caveats
@@ -52,6 +57,14 @@ class LogsMcpServer < Formula
            export LOGS_API_KEY='your-api-key'
            export LOGS_SERVICE_URL='https://[instance-id].api.[region].logs.cloud.ibm.com'
         3. Configure in Claude Desktop
+
+      Agent Skill (IBM Cloud Logs) has been installed to ~/.agents/skills/
+      These work with Claude Code, Cursor, Gemini CLI, GitHub Copilot, and 30+ other agents.
+
+      Manage skills:
+        logs-mcp-server skills list               # list available skills
+        logs-mcp-server skills install             # reinstall to ~/.agents/skills/
+        logs-mcp-server skills install --project   # install to current project
 
       For more information, see: https://github.com/tareqmamari/cloud-logs-mcp
     EOS
